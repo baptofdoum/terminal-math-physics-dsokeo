@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,6 +17,20 @@ export default function ExerciseDetailScreen() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const exercise = exercises.find(e => e.id === id);
+  const isCompleted = exercise ? completedExercises.has(exercise.id) : false;
+
+  // Move useEffect before any conditional returns
+  useEffect(() => {
+    if (exercise && !isCompleted) {
+      addToHistory({
+        type: 'exercise',
+        itemId: exercise.id,
+        title: exercise.title,
+        subject: exercise.subject,
+        completed: false,
+      });
+    }
+  }, [exercise, isCompleted, addToHistory]);
 
   if (!exercise) {
     return (
@@ -33,8 +47,6 @@ export default function ExerciseDetailScreen() {
       </SafeAreaView>
     );
   }
-
-  const isCompleted = completedExercises.has(exercise.id);
 
   const handleSubmit = () => {
     if (!selectedAnswer) {
@@ -71,18 +83,6 @@ export default function ExerciseDetailScreen() {
     setShowExplanation(false);
     setIsCorrect(null);
   };
-
-  React.useEffect(() => {
-    if (!isCompleted) {
-      addToHistory({
-        type: 'exercise',
-        itemId: exercise.id,
-        title: exercise.title,
-        subject: exercise.subject,
-        completed: false,
-      });
-    }
-  }, []);
 
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>

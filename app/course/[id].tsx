@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,6 +15,20 @@ export default function CourseDetailScreen() {
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set());
 
   const course = courses.find(c => c.id === id);
+  const isCompleted = course ? completedCourses.has(course.id) : false;
+
+  // Move useEffect before any conditional returns
+  useEffect(() => {
+    if (course) {
+      addToHistory({
+        type: 'course',
+        itemId: course.id,
+        title: course.title,
+        subject: course.subject,
+        completed: isCompleted,
+      });
+    }
+  }, [course, isCompleted, addToHistory]);
 
   if (!course) {
     return (
@@ -31,8 +45,6 @@ export default function CourseDetailScreen() {
       </SafeAreaView>
     );
   }
-
-  const isCompleted = completedCourses.has(course.id);
 
   const toggleChapter = (chapterId: string) => {
     const newExpanded = new Set(expandedChapters);
@@ -54,16 +66,6 @@ export default function CourseDetailScreen() {
       completed: true,
     });
   };
-
-  React.useEffect(() => {
-    addToHistory({
-      type: 'course',
-      itemId: course.id,
-      title: course.title,
-      subject: course.subject,
-      completed: isCompleted,
-    });
-  }, []);
 
   return (
     <SafeAreaView style={styles.container} edges={['bottom']}>
