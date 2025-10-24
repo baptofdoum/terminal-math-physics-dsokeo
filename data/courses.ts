@@ -2,6 +2,770 @@
 import { Course } from '@/types/course';
 
 export const courses: Course[] = [
+  // ===== MATHÉMATIQUES TERMINALE S SI =====
+  {
+    id: 'math-1',
+    title: 'Suites numériques',
+    subject: 'math',
+    description: 'Suites arithmétiques, géométriques et récurrentes',
+    duration: '3h',
+    difficulty: 'intermediate',
+    chapters: [
+      {
+        id: 'math-1-ch1',
+        title: 'Suites arithmétiques et géométriques',
+        content: `Les suites sont des fonctions définies sur ℕ.
+
+**Suite arithmétique:**
+Une suite (un) est arithmétique si un+1 = un + r
+
+Où r est la raison de la suite.
+
+**Terme général:**
+un = u0 + n × r
+
+**Somme des n premiers termes:**
+Sn = n × (u0 + un)/2 = n × (2u0 + (n-1)r)/2
+
+**Suite géométrique:**
+Une suite (un) est géométrique si un+1 = un × q
+
+Où q est la raison de la suite.
+
+**Terme général:**
+un = u0 × q^n
+
+**Somme des n premiers termes:**
+Sn = u0 × (1 - q^n)/(1 - q) si q ≠ 1
+
+**Vidéos YouTube:**
+- Suites arithmétiques: https://www.youtube.com/watch?v=8jB6hDUqN0Y
+- Suites géométriques: https://www.youtube.com/watch?v=3WL8i8RzJno
+- Sommes de termes: https://www.youtube.com/watch?v=kFlVqFEPHDo`,
+        examples: [
+          'Suite arithmétique: 2, 5, 8, 11, ... (r = 3)',
+          'Suite géométrique: 3, 6, 12, 24, ... (q = 2)',
+          'Somme: 1 + 2 + 3 + ... + n = n(n+1)/2'
+        ],
+      },
+      {
+        id: 'math-1-ch2',
+        title: 'Suites récurrentes et limites',
+        content: `Étude des suites définies par récurrence.
+
+**Suite récurrente:**
+un+1 = f(un) avec u0 donné
+
+**Sens de variation:**
+- Croissante si un+1 ≥ un pour tout n
+- Décroissante si un+1 ≤ un pour tout n
+
+**Limite d'une suite:**
+lim(n→∞) un = L signifie que un se rapproche de L quand n tend vers l'infini.
+
+**Théorèmes:**
+- Suite croissante majorée converge
+- Suite décroissante minorée converge
+- Théorème des gendarmes
+
+**Suites adjacentes:**
+Deux suites (un) et (vn) sont adjacentes si:
+- (un) est croissante
+- (vn) est décroissante
+- lim(vn - un) = 0
+
+**Vidéos YouTube:**
+- Suites récurrentes: https://www.youtube.com/watch?v=2kFzCdP8H8A
+- Limites de suites: https://www.youtube.com/watch?v=IL2MCJV8x-Y
+- Convergence: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'un+1 = √(un + 2) avec u0 = 1',
+          'Suite de Fibonacci: un+2 = un+1 + un',
+          'lim(1/n) = 0 quand n → ∞'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-2',
+    title: 'Fonctions - Limites et continuité',
+    subject: 'math',
+    description: 'Étude des limites et de la continuité des fonctions',
+    duration: '3h30',
+    difficulty: 'intermediate',
+    chapters: [
+      {
+        id: 'math-2-ch1',
+        title: 'Limites de fonctions',
+        content: `Étude du comportement d'une fonction aux bornes de son domaine.
+
+**Limite finie en un point:**
+lim(x→a) f(x) = L
+
+**Limite infinie:**
+lim(x→a) f(x) = +∞ ou -∞
+
+**Limites à l'infini:**
+lim(x→+∞) f(x) = L ou ±∞
+
+**Opérations sur les limites:**
+- Somme: lim(f + g) = lim(f) + lim(g)
+- Produit: lim(f × g) = lim(f) × lim(g)
+- Quotient: lim(f/g) = lim(f)/lim(g) si lim(g) ≠ 0
+
+**Formes indéterminées:**
+- 0/0, ∞/∞, 0×∞, ∞-∞
+
+**Limites usuelles:**
+- lim(x→+∞) x^n = +∞
+- lim(x→+∞) 1/x^n = 0
+- lim(x→0) sin(x)/x = 1
+- lim(x→+∞) e^x = +∞
+- lim(x→+∞) ln(x) = +∞
+
+**Vidéos YouTube:**
+- Limites de fonctions: https://www.youtube.com/watch?v=yKbUxCJ3Saw
+- Formes indéterminées: https://www.youtube.com/watch?v=qKvKjYwZ8Hs
+- Limites usuelles: https://www.youtube.com/watch?v=7FYHt5XviKc`,
+        examples: [
+          'lim(x→2) (x² - 4)/(x - 2) = 4',
+          'lim(x→+∞) (3x² + 2x)/(x² - 1) = 3',
+          'lim(x→0+) 1/x = +∞'
+        ],
+      },
+      {
+        id: 'math-2-ch2',
+        title: 'Continuité',
+        content: `Une fonction continue n'a pas de "saut" sur son domaine.
+
+**Définition:**
+f est continue en a si:
+- f(a) existe
+- lim(x→a) f(x) existe
+- lim(x→a) f(x) = f(a)
+
+**Fonctions continues:**
+- Polynômes
+- Fonctions rationnelles (sur leur domaine)
+- Fonctions trigonométriques
+- Fonctions exponentielles et logarithmes
+- Composées de fonctions continues
+
+**Théorème des valeurs intermédiaires (TVI):**
+Si f est continue sur [a,b] et si k est entre f(a) et f(b), alors il existe c ∈ [a,b] tel que f(c) = k.
+
+**Application:** Résolution d'équations
+
+**Prolongement par continuité:**
+Si lim(x→a) f(x) = L, on peut définir f(a) = L pour rendre f continue en a.
+
+**Vidéos YouTube:**
+- Continuité: https://www.youtube.com/watch?v=7w8QJhqBESE
+- TVI: https://www.youtube.com/watch?v=iKFMrVhZGHk
+- Applications: https://www.youtube.com/watch?v=5Hx4QQXJ8Hs`,
+        examples: [
+          'f(x) = x² est continue sur ℝ',
+          'f(x) = 1/x est continue sur ℝ*',
+          'TVI: x³ - x - 1 = 0 a une solution dans [1,2]'
+        ],
+      },
+      {
+        id: 'math-2-ch3',
+        title: 'Asymptotes',
+        content: `Les asymptotes décrivent le comportement d'une fonction à l'infini ou près d'une valeur interdite.
+
+**Asymptote verticale:**
+x = a est asymptote verticale si lim(x→a) f(x) = ±∞
+
+**Asymptote horizontale:**
+y = b est asymptote horizontale si lim(x→±∞) f(x) = b
+
+**Asymptote oblique:**
+y = ax + b est asymptote oblique si:
+lim(x→±∞) [f(x) - (ax + b)] = 0
+
+**Méthode pour trouver une asymptote oblique:**
+1. Calculer a = lim(x→±∞) f(x)/x
+2. Calculer b = lim(x→±∞) [f(x) - ax]
+
+**Position relative:**
+Étudier le signe de f(x) - (ax + b)
+
+**Vidéos YouTube:**
+- Asymptotes: https://www.youtube.com/watch?v=fKjLWSQQzKo
+- Asymptote oblique: https://www.youtube.com/watch?v=JrKoccVkVEA
+- Position relative: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'f(x) = 1/x a pour asymptotes x = 0 et y = 0',
+          'f(x) = (x² + 1)/x a pour asymptote y = x',
+          'f(x) = e^x a pour asymptote y = 0 en -∞'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-3',
+    title: 'Dérivation',
+    subject: 'math',
+    description: 'Calcul de dérivées et applications',
+    duration: '3h',
+    difficulty: 'intermediate',
+    chapters: [
+      {
+        id: 'math-3-ch1',
+        title: 'Nombre dérivé et fonction dérivée',
+        content: `La dérivée mesure le taux de variation instantané d'une fonction.
+
+**Nombre dérivé:**
+f'(a) = lim(h→0) [f(a+h) - f(a)]/h
+
+**Interprétation géométrique:**
+f'(a) est le coefficient directeur de la tangente à la courbe en a.
+
+**Équation de la tangente:**
+y = f'(a)(x - a) + f(a)
+
+**Dérivées usuelles:**
+- (x^n)' = n × x^(n-1)
+- (√x)' = 1/(2√x)
+- (1/x)' = -1/x²
+- (e^x)' = e^x
+- (ln(x))' = 1/x
+- (sin(x))' = cos(x)
+- (cos(x))' = -sin(x)
+
+**Opérations:**
+- (u + v)' = u' + v'
+- (ku)' = ku'
+- (uv)' = u'v + uv'
+- (u/v)' = (u'v - uv')/v²
+- (u∘v)' = v' × u'∘v (dérivée composée)
+
+**Vidéos YouTube:**
+- Dérivation: https://www.youtube.com/watch?v=LAtPHANEfQo
+- Dérivées usuelles: https://www.youtube.com/watch?v=CWulQ1ZSE3c
+- Tangente: https://www.youtube.com/watch?v=7XS8p5kQqvI`,
+        examples: [
+          'f(x) = x³ → f\'(x) = 3x²',
+          'f(x) = e^(2x) → f\'(x) = 2e^(2x)',
+          'f(x) = ln(x²+1) → f\'(x) = 2x/(x²+1)'
+        ],
+      },
+      {
+        id: 'math-3-ch2',
+        title: 'Variations et extremums',
+        content: `La dérivée permet d'étudier les variations d'une fonction.
+
+**Théorème:**
+- Si f' > 0 sur I, alors f est croissante sur I
+- Si f' < 0 sur I, alors f est décroissante sur I
+- Si f' = 0 sur I, alors f est constante sur I
+
+**Extremum local:**
+- Maximum local en a si f'(a) = 0 et f' change de signe de + à -
+- Minimum local en a si f'(a) = 0 et f' change de signe de - à +
+
+**Tableau de variations:**
+1. Calculer f'(x)
+2. Étudier le signe de f'(x)
+3. Dresser le tableau de variations
+
+**Extremum global:**
+Sur un intervalle fermé [a,b], comparer:
+- f(a) et f(b)
+- Les valeurs aux points critiques
+
+**Vidéos YouTube:**
+- Variations: https://www.youtube.com/watch?v=K9P4GvFdgKo
+- Extremums: https://www.youtube.com/watch?v=xQXqVuLh8Qs
+- Tableau de variations: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'f(x) = x² - 4x + 3 a un minimum en x = 2',
+          'f(x) = -x² + 2x a un maximum en x = 1',
+          'f(x) = x³ n\'a pas d\'extremum'
+        ],
+      },
+      {
+        id: 'math-3-ch3',
+        title: 'Convexité',
+        content: `La convexité décrit la courbure d'une fonction.
+
+**Fonction convexe:**
+La courbe est "en forme de U" (tournée vers le haut)
+
+**Fonction concave:**
+La courbe est "en forme de ∩" (tournée vers le bas)
+
+**Critère de convexité:**
+- f est convexe sur I si f'' ≥ 0 sur I
+- f est concave sur I si f'' ≤ 0 sur I
+
+**Point d'inflexion:**
+Point où f change de convexité (f'' change de signe)
+
+**Inégalité de convexité:**
+Si f est convexe sur I, alors pour tout a, b ∈ I et λ ∈ [0,1]:
+f(λa + (1-λ)b) ≤ λf(a) + (1-λ)f(b)
+
+**Position relative tangente:**
+- Si f convexe: courbe au-dessus de ses tangentes
+- Si f concave: courbe en-dessous de ses tangentes
+
+**Vidéos YouTube:**
+- Convexité: https://www.youtube.com/watch?v=wFI-h0RFvKc
+- Point d'inflexion: https://www.youtube.com/watch?v=K9P4GvFdgKo
+- Applications: https://www.youtube.com/watch?v=LAtPHANEfQo`,
+        examples: [
+          'f(x) = x² est convexe sur ℝ',
+          'f(x) = ln(x) est concave sur ℝ+*',
+          'f(x) = x³ a un point d\'inflexion en x = 0'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-4',
+    title: 'Fonction exponentielle',
+    subject: 'math',
+    description: 'Propriétés et applications de la fonction exponentielle',
+    duration: '2h30',
+    difficulty: 'intermediate',
+    chapters: [
+      {
+        id: 'math-4-ch1',
+        title: 'Définition et propriétés',
+        content: `La fonction exponentielle est la fonction réciproque du logarithme népérien.
+
+**Définition:**
+exp(x) = e^x où e ≈ 2,718...
+
+**Propriétés algébriques:**
+- e^(a+b) = e^a × e^b
+- e^(a-b) = e^a / e^b
+- e^(-x) = 1/e^x
+- (e^a)^b = e^(ab)
+- e^0 = 1
+
+**Dérivée:**
+(e^x)' = e^x
+
+**Limites:**
+- lim(x→+∞) e^x = +∞
+- lim(x→-∞) e^x = 0
+- lim(x→+∞) e^x/x^n = +∞ (croissance comparée)
+- lim(x→-∞) x^n × e^x = 0
+
+**Variations:**
+e^x est strictement croissante sur ℝ
+
+**Vidéos YouTube:**
+- Fonction exponentielle: https://www.youtube.com/watch?v=UchitHGF4n8
+- Propriétés: https://www.youtube.com/watch?v=VbbxFZWfCPE
+- Dérivée: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'e^2 × e^3 = e^5',
+          '(e^x)' = e^x',
+          'e^(ln(x)) = x pour x > 0'
+        ],
+      },
+      {
+        id: 'math-4-ch2',
+        title: 'Équations et inéquations',
+        content: `Résolution d'équations et inéquations avec l'exponentielle.
+
+**Équations:**
+- e^x = a ⟺ x = ln(a) si a > 0
+- e^x = e^y ⟺ x = y
+- e^(f(x)) = a ⟺ f(x) = ln(a)
+
+**Inéquations:**
+- e^x > a ⟺ x > ln(a) si a > 0
+- e^x < a ⟺ x < ln(a) si a > 0
+- e^(f(x)) > e^(g(x)) ⟺ f(x) > g(x)
+
+**Méthode:**
+1. Isoler l'exponentielle
+2. Appliquer le logarithme
+3. Résoudre l'équation obtenue
+
+**Cas particuliers:**
+- e^x = 0 n'a pas de solution
+- e^x < 0 n'a pas de solution
+
+**Vidéos YouTube:**
+- Équations exponentielles: https://www.youtube.com/watch?v=UchitHGF4n8
+- Inéquations: https://www.youtube.com/watch?v=VbbxFZWfCPE
+- Méthodes de résolution: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'e^x = 5 ⟺ x = ln(5)',
+          'e^(2x) = 8 ⟺ 2x = ln(8) ⟺ x = ln(8)/2',
+          'e^x > 3 ⟺ x > ln(3)'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-5',
+    title: 'Fonction logarithme népérien',
+    subject: 'math',
+    description: 'Propriétés et applications du logarithme népérien',
+    duration: '2h30',
+    difficulty: 'intermediate',
+    chapters: [
+      {
+        id: 'math-5-ch1',
+        title: 'Définition et propriétés',
+        content: `Le logarithme népérien est la fonction réciproque de l'exponentielle.
+
+**Définition:**
+ln(x) est défini pour x > 0
+y = ln(x) ⟺ e^y = x
+
+**Propriétés algébriques:**
+- ln(ab) = ln(a) + ln(b)
+- ln(a/b) = ln(a) - ln(b)
+- ln(a^n) = n × ln(a)
+- ln(1) = 0
+- ln(e) = 1
+- ln(1/a) = -ln(a)
+
+**Dérivée:**
+(ln(x))' = 1/x pour x > 0
+
+**Limites:**
+- lim(x→+∞) ln(x) = +∞
+- lim(x→0+) ln(x) = -∞
+- lim(x→+∞) ln(x)/x = 0 (croissance comparée)
+- lim(x→0+) x × ln(x) = 0
+
+**Variations:**
+ln(x) est strictement croissante sur ]0,+∞[
+
+**Vidéos YouTube:**
+- Logarithme népérien: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Propriétés: https://www.youtube.com/watch?v=LtJoJBUSe28
+- Dérivée: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'ln(2×3) = ln(2) + ln(3)',
+          'ln(e²) = 2',
+          '(ln(x²+1))' = 2x/(x²+1)'
+        ],
+      },
+      {
+        id: 'math-5-ch2',
+        title: 'Équations et inéquations',
+        content: `Résolution d'équations et inéquations avec le logarithme.
+
+**Équations:**
+- ln(x) = a ⟺ x = e^a
+- ln(x) = ln(y) ⟺ x = y (si x, y > 0)
+- ln(f(x)) = a ⟺ f(x) = e^a
+
+**Inéquations:**
+- ln(x) > a ⟺ x > e^a
+- ln(x) < a ⟺ 0 < x < e^a
+- ln(f(x)) > ln(g(x)) ⟺ f(x) > g(x) > 0
+
+**Méthode:**
+1. Vérifier le domaine de définition (x > 0)
+2. Appliquer l'exponentielle
+3. Résoudre l'équation obtenue
+
+**Attention:**
+ln(x) n'est défini que pour x > 0
+
+**Vidéos YouTube:**
+- Équations logarithmiques: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Inéquations: https://www.youtube.com/watch?v=LtJoJBUSe28
+- Méthodes: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
+        examples: [
+          'ln(x) = 2 ⟺ x = e²',
+          'ln(2x-1) = 0 ⟺ 2x-1 = 1 ⟺ x = 1',
+          'ln(x) > 1 ⟺ x > e'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-6',
+    title: 'Intégration',
+    subject: 'math',
+    description: 'Calcul d\'intégrales et primitives',
+    duration: '3h30',
+    difficulty: 'advanced',
+    chapters: [
+      {
+        id: 'math-6-ch1',
+        title: 'Primitives',
+        content: `Une primitive de f est une fonction F telle que F' = f.
+
+**Primitives usuelles:**
+- ∫ x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)
+- ∫ 1/x dx = ln|x| + C
+- ∫ e^x dx = e^x + C
+- ∫ cos(x) dx = sin(x) + C
+- ∫ sin(x) dx = -cos(x) + C
+- ∫ 1/(1+x²) dx = arctan(x) + C
+
+**Linéarité:**
+∫ [af(x) + bg(x)] dx = a∫f(x)dx + b∫g(x)dx
+
+**Primitive d'une composée:**
+∫ u'(x) × f(u(x)) dx = F(u(x)) + C
+où F est une primitive de f
+
+**Intégration par parties:**
+∫ u'v dx = uv - ∫ uv' dx
+
+**Vidéos YouTube:**
+- Primitives: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Primitives usuelles: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Intégration par parties: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          '∫ 3x² dx = x³ + C',
+          '∫ 2x×e^(x²) dx = e^(x²) + C',
+          '∫ x×e^x dx = (x-1)e^x + C (par parties)'
+        ],
+      },
+      {
+        id: 'math-6-ch2',
+        title: 'Intégrale définie',
+        content: `L'intégrale définie représente l'aire sous la courbe.
+
+**Définition:**
+∫[a,b] f(x) dx = F(b) - F(a)
+où F est une primitive de f
+
+**Propriétés:**
+- ∫[a,a] f(x) dx = 0
+- ∫[a,b] f(x) dx = -∫[b,a] f(x) dx
+- ∫[a,b] f(x) dx = ∫[a,c] f(x) dx + ∫[c,b] f(x) dx (relation de Chasles)
+- ∫[a,b] [f(x) + g(x)] dx = ∫[a,b] f(x) dx + ∫[a,b] g(x) dx
+
+**Interprétation géométrique:**
+- Si f ≥ 0: aire sous la courbe
+- Si f ≤ 0: opposé de l'aire
+- Aire entre deux courbes: ∫[a,b] |f(x) - g(x)| dx
+
+**Valeur moyenne:**
+μ = 1/(b-a) × ∫[a,b] f(x) dx
+
+**Vidéos YouTube:**
+- Intégrale définie: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Calcul d'aires: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Applications: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          '∫[0,1] x² dx = [x³/3]₀¹ = 1/3',
+          '∫[0,π] sin(x) dx = [-cos(x)]₀^π = 2',
+          'Aire entre y=x² et y=x sur [0,1]: ∫[0,1] (x-x²) dx = 1/6'
+        ],
+      },
+      {
+        id: 'math-6-ch3',
+        title: 'Équations différentielles',
+        content: `Une équation différentielle lie une fonction à ses dérivées.
+
+**Équation y' = ay:**
+Solution générale: y = Ce^(ax)
+
+**Équation y' = ay + b:**
+Solution générale: y = Ce^(ax) - b/a
+
+**Équation y'' + ω²y = 0:**
+Solution générale: y = A×cos(ωx) + B×sin(ωx)
+
+**Méthode de résolution:**
+1. Trouver la solution générale
+2. Utiliser les conditions initiales pour déterminer les constantes
+
+**Condition initiale:**
+y(x₀) = y₀ permet de déterminer C
+
+**Applications:**
+- Croissance exponentielle
+- Décroissance radioactive
+- Oscillations harmoniques
+
+**Vidéos YouTube:**
+- Équations différentielles: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Résolution: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Applications: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          'y\' = 2y avec y(0) = 3 → y = 3e^(2x)',
+          'y\' = -y + 1 avec y(0) = 0 → y = 1 - e^(-x)',
+          'y\'\' + 4y = 0 → y = A×cos(2x) + B×sin(2x)'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-7',
+    title: 'Nombres complexes',
+    subject: 'math',
+    description: 'Forme algébrique, trigonométrique et exponentielle',
+    duration: '3h',
+    difficulty: 'advanced',
+    chapters: [
+      {
+        id: 'math-7-ch1',
+        title: 'Forme algébrique',
+        content: `Les nombres complexes étendent les nombres réels.
+
+**Définition:**
+z = a + ib où i² = -1
+- a = Re(z): partie réelle
+- b = Im(z): partie imaginaire
+
+**Opérations:**
+- Addition: (a+ib) + (c+id) = (a+c) + i(b+d)
+- Multiplication: (a+ib)(c+id) = (ac-bd) + i(ad+bc)
+- Conjugué: z̄ = a - ib
+- Module: |z| = √(a² + b²)
+
+**Propriétés du conjugué:**
+- z + z̄ = 2Re(z)
+- z - z̄ = 2iIm(z)
+- z × z̄ = |z|²
+- z̄̄ = z
+
+**Division:**
+z₁/z₂ = (z₁ × z̄₂)/(z₂ × z̄₂) = (z₁ × z̄₂)/|z₂|²
+
+**Vidéos YouTube:**
+- Nombres complexes: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Forme algébrique: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Opérations: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          '(2+3i) + (1-i) = 3+2i',
+          '(1+i)(1-i) = 1-i² = 2',
+          '|3+4i| = √(9+16) = 5'
+        ],
+      },
+      {
+        id: 'math-7-ch2',
+        title: 'Forme trigonométrique et exponentielle',
+        content: `Représentation géométrique des nombres complexes.
+
+**Forme trigonométrique:**
+z = r(cos θ + i sin θ)
+où r = |z| et θ = arg(z)
+
+**Forme exponentielle:**
+z = re^(iθ)
+
+**Formule d'Euler:**
+e^(iθ) = cos θ + i sin θ
+
+**Argument:**
+- arg(z₁z₂) = arg(z₁) + arg(z₂) [2π]
+- arg(z₁/z₂) = arg(z₁) - arg(z₂) [2π]
+- arg(z^n) = n × arg(z) [2π]
+
+**Formule de Moivre:**
+(cos θ + i sin θ)^n = cos(nθ) + i sin(nθ)
+
+**Racines n-ièmes:**
+Les racines n-ièmes de z = re^(iθ) sont:
+zₖ = r^(1/n) × e^(i(θ+2kπ)/n) pour k = 0, 1, ..., n-1
+
+**Vidéos YouTube:**
+- Forme trigonométrique: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Forme exponentielle: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Formule de Moivre: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          '1+i = √2 × e^(iπ/4)',
+          '(1+i)⁸ = (√2)⁸ × e^(i×8π/4) = 16',
+          'Racines cubiques de 1: 1, e^(i2π/3), e^(i4π/3)'
+        ],
+      },
+    ],
+  },
+  {
+    id: 'math-8',
+    title: 'Géométrie dans l\'espace',
+    subject: 'math',
+    description: 'Vecteurs, droites et plans dans l\'espace',
+    duration: '3h',
+    difficulty: 'intermediate',
+    chapters: [
+      {
+        id: 'math-8-ch1',
+        title: 'Vecteurs de l\'espace',
+        content: `Extension des vecteurs du plan à l'espace.
+
+**Repère de l'espace:**
+(O; i⃗, j⃗, k⃗) avec i⃗, j⃗, k⃗ non coplanaires
+
+**Coordonnées:**
+v⃗ = (x, y, z) = xi⃗ + yj⃗ + zk⃗
+
+**Opérations:**
+- Addition: u⃗ + v⃗ = (x₁+x₂, y₁+y₂, z₁+z₂)
+- Multiplication par un scalaire: λu⃗ = (λx, λy, λz)
+
+**Norme:**
+||u⃗|| = √(x² + y² + z²)
+
+**Produit scalaire:**
+u⃗ · v⃗ = x₁x₂ + y₁y₂ + z₁z₂
+u⃗ · v⃗ = ||u⃗|| × ||v⃗|| × cos(u⃗,v⃗)
+
+**Orthogonalité:**
+u⃗ ⊥ v⃗ ⟺ u⃗ · v⃗ = 0
+
+**Colinéarité:**
+u⃗ et v⃗ colinéaires ⟺ ∃λ, u⃗ = λv⃗
+
+**Vidéos YouTube:**
+- Vecteurs dans l'espace: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Produit scalaire: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Applications: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          'u⃗(1,2,3) + v⃗(2,1,0) = (3,3,3)',
+          '||u⃗(1,2,2)|| = √(1+4+4) = 3',
+          'u⃗(1,0,0) · v⃗(0,1,0) = 0 → orthogonaux'
+        ],
+      },
+      {
+        id: 'math-8-ch2',
+        title: 'Droites et plans',
+        content: `Équations de droites et de plans dans l'espace.
+
+**Équation paramétrique d'une droite:**
+Passant par A(x₀,y₀,z₀) de vecteur directeur u⃗(a,b,c):
+x = x₀ + ta
+y = y₀ + tb
+z = z₀ + tc
+
+**Équation cartésienne d'un plan:**
+ax + by + cz + d = 0
+où n⃗(a,b,c) est un vecteur normal au plan
+
+**Plan défini par trois points:**
+Le plan (ABC) a pour vecteur normal n⃗ = AB⃗ ∧ AC⃗
+
+**Distance point-plan:**
+d(M,P) = |ax₀ + by₀ + cz₀ + d|/√(a² + b² + c²)
+
+**Intersection:**
+- Droite-plan: résoudre le système
+- Deux plans: droite d'intersection
+- Trois plans: point ou droite ou vide
+
+**Vidéos YouTube:**
+- Droites dans l'espace: https://www.youtube.com/watch?v=8wHVQNu3Tz8
+- Plans: https://www.youtube.com/watch?v=AQqyGNOP_3o
+- Intersections: https://www.youtube.com/watch?v=LtJoJBUSe28`,
+        examples: [
+          'Droite: (x,y,z) = (1,2,3) + t(1,0,1)',
+          'Plan: 2x - y + 3z - 6 = 0',
+          'Distance de O(0,0,0) au plan x+y+z-3=0: 3/√3 = √3'
+        ],
+      },
+    ],
+  },
+
+  // ===== PHYSIQUE BTS ÉLECTROTECHNIQUE =====
   {
     id: 'elec-1',
     title: 'Circuits électriques en courant continu',
@@ -384,697 +1148,6 @@ Pu = Tu × Ω (puissance utile)
           'Moteur série: démarrage d\'un tramway',
           'Moteur shunt: tour à métaux',
           'Moteur compound: laminoir'
-        ],
-      },
-    ],
-  },
-  {
-    id: 'elec-4',
-    title: 'Transformateurs monophasés',
-    subject: 'physics',
-    description: 'Étude des transformateurs en régime sinusoïdal',
-    duration: '3h',
-    difficulty: 'intermediate',
-    chapters: [
-      {
-        id: 'elec-4-ch1',
-        title: 'Constitution et principe',
-        content: `Le transformateur permet de modifier les niveaux de tension.
-
-**Constitution:**
-- Circuit magnétique (noyau ferromagnétique)
-- Enroulement primaire (N1 spires)
-- Enroulement secondaire (N2 spires)
-
-**Principe:**
-Un courant alternatif dans le primaire crée un flux magnétique variable qui induit une tension dans le secondaire.
-
-**Rapport de transformation:**
-m = N2/N1 = U2/U1 = I1/I2
-
-**Types de transformateurs:**
-- Abaisseur: m < 1 (U2 < U1)
-- Élévateur: m > 1 (U2 > U1)
-- Isolement: m = 1 (U2 = U1)
-
-**Équations:**
-- Primaire: U1 = -N1 × dΦ/dt
-- Secondaire: U2 = -N2 × dΦ/dt
-
-**Flux magnétique:**
-Φ = Φmax × sin(ωt)
-
-**Vidéos YouTube:**
-- Transformateur monophasé: https://www.youtube.com/watch?v=UchitHGF4n8
-- Principe du transformateur: https://www.youtube.com/watch?v=VbbxFZWfCPE
-- Rapport de transformation: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
-        examples: [
-          'Transformateur 230V/24V: m = 24/230 ≈ 0,104',
-          'Transformateur élévateur: centrale électrique',
-          'Transformateur d\'isolement: sécurité'
-        ],
-      },
-      {
-        id: 'elec-4-ch2',
-        title: 'Transformateur réel',
-        content: `Prise en compte des imperfections du transformateur.
-
-**Pertes dans le transformateur:**
-- Pertes fer (magnétiques): hystérésis + courants de Foucault
-- Pertes Joule: R1 × I1² + R2 × I2²
-
-**Schéma équivalent:**
-- Résistances des enroulements: R1, R2
-- Inductances de fuite: L1, L2
-- Résistance représentant les pertes fer: Rf
-- Inductance magnétisante: Lm
-
-**Chute de tension:**
-ΔU = U20 - U2
-Où U20 est la tension à vide
-
-**Rendement:**
-η = P2/P1 = P2/(P2 + pertes)
-
-**Essais du transformateur:**
-- Essai à vide: détermination du rapport m et des pertes fer
-- Essai en court-circuit: détermination des résistances et réactances
-
-**Indice horaire:**
-Déphasage entre primaire et secondaire (couplage des enroulements).
-
-**Vidéos YouTube:**
-- Transformateur réel: https://www.youtube.com/watch?v=UchitHGF4n8
-- Pertes dans le transformateur: https://www.youtube.com/watch?v=VbbxFZWfCPE
-- Essais du transformateur: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
-        examples: [
-          'Essai à vide: I10 faible, mesure de P10 (pertes fer)',
-          'Essai en court-circuit: U1cc faible, mesure de Pcc (pertes Joule)',
-          'Rendement maximal quand pertes fer = pertes Joule'
-        ],
-      },
-      {
-        id: 'elec-4-ch3',
-        title: 'Couplages et transformateurs triphasés',
-        content: `Transformateurs pour systèmes triphasés.
-
-**Couplages possibles:**
-- Étoile (Y): tensions simples et composées
-- Triangle (Δ): tensions composées
-- Zigzag (Z): amélioration de l'équilibrage
-
-**Symboles de couplage:**
-- Yy: étoile-étoile
-- Yd: étoile-triangle
-- Dy: triangle-étoile
-- Dz: triangle-zigzag
-
-**Relations en triphasé:**
-- Tension composée: U = √3 × V
-- Puissance: P = √3 × U × I × cos(φ)
-
-**Indice horaire:**
-Déphasage entre primaire et secondaire exprimé en heures (0 à 11).
-
-**Applications:**
-- Distribution électrique
-- Adaptation de tension
-- Isolement galvanique
-
-**Vidéos YouTube:**
-- Transformateur triphasé: https://www.youtube.com/watch?v=UchitHGF4n8
-- Couplages étoile-triangle: https://www.youtube.com/watch?v=VbbxFZWfCPE
-- Indice horaire: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
-        examples: [
-          'Couplage Dy11: distribution BT',
-          'Couplage Yd11: élévation de tension',
-          'Couplage Yz11: alimentation déséquilibrée'
-        ],
-      },
-    ],
-  },
-  {
-    id: 'elec-5',
-    title: 'Machines asynchrones triphasées',
-    subject: 'physics',
-    description: 'Étude des moteurs asynchrones',
-    duration: '4h',
-    difficulty: 'advanced',
-    chapters: [
-      {
-        id: 'elec-5-ch1',
-        title: 'Constitution et principe',
-        content: `Le moteur asynchrone est le plus utilisé dans l'industrie.
-
-**Constitution:**
-- Stator: enroulements triphasés créant un champ tournant
-- Rotor: cage d'écureuil ou bobiné
-- Entrefer: espace entre stator et rotor
-
-**Principe du champ tournant:**
-Trois enroulements décalés de 120° alimentés par un système triphasé créent un champ magnétique tournant.
-
-**Vitesse de synchronisme:**
-ns = f/p
-
-Où:
-- f: fréquence du réseau (Hz)
-- p: nombre de paires de pôles
-- ns: vitesse en tr/s
-
-**Glissement:**
-g = (ns - n)/ns
-
-Où:
-- n: vitesse du rotor
-- g: glissement (0 < g < 1)
-
-**Fréquence rotorique:**
-fr = g × f
-
-**Principe de fonctionnement:**
-Le champ tournant induit des courants dans le rotor qui créent un couple.
-
-**Vidéos YouTube:**
-- Moteur asynchrone: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Champ tournant: https://www.youtube.com/watch?v=LtJoJBUSe28
-- Principe du moteur asynchrone: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
-        examples: [
-          'Moteur 2 pôles, 50Hz: ns = 50/1 = 50 tr/s = 3000 tr/min',
-          'Moteur 4 pôles, 50Hz: ns = 50/2 = 25 tr/s = 1500 tr/min',
-          'Glissement nominal: 2 à 5%'
-        ],
-      },
-      {
-        id: 'elec-5-ch2',
-        title: 'Bilan de puissance et caractéristiques',
-        content: `Analyse énergétique du moteur asynchrone.
-
-**Bilan de puissance:**
-Pa = √3 × U × I × cos(φ) (puissance absorbée)
-Ptr = Pa - pJs (puissance transmise au rotor)
-Pem = Ptr - pJr (puissance électromagnétique)
-Pu = Pem - pméca (puissance utile)
-
-**Pertes:**
-- Pertes Joule stator: pJs = 3 × Rs × I²
-- Pertes fer: pfer (constantes)
-- Pertes Joule rotor: pJr = g × Ptr
-- Pertes mécaniques: pméca (frottements, ventilation)
-
-**Couple électromagnétique:**
-Tem = Pem/Ωs = Ptr/(2π × ns)
-
-**Couple utile:**
-Tu = Pu/Ω = Pu/(2π × n)
-
-**Rendement:**
-η = Pu/Pa
-
-**Caractéristique couple-vitesse:**
-- Zone stable: 0 < g < gn
-- Couple de démarrage: Td
-- Couple maximal: Tmax
-- Couple nominal: Tn
-
-**Vidéos YouTube:**
-- Bilan de puissance moteur asynchrone: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Caractéristiques du moteur: https://www.youtube.com/watch?v=LtJoJBUSe28
-- Rendement et pertes: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
-        examples: [
-          'Moteur 5,5kW, η = 0,85 → Pa = 6,47kW',
-          'Glissement 3% → pJr = 0,03 × Ptr',
-          'Point de fonctionnement: Tem = Tr'
-        ],
-      },
-      {
-        id: 'elec-5-ch3',
-        title: 'Démarrage et variation de vitesse',
-        content: `Méthodes de démarrage et de contrôle des moteurs asynchrones.
-
-**Problème du démarrage:**
-- Courant de démarrage élevé: Id = 5 à 8 × In
-- Couple de démarrage faible: Td = 0,5 à 1,5 × Tn
-
-**Démarrage direct:**
-- Simple et économique
-- Réservé aux petites puissances
-- Pointe de courant importante
-
-**Démarrage étoile-triangle:**
-- Réduction du courant: Id/√3
-- Réduction du couple: Td/3
-- Commutation étoile → triangle
-
-**Démarrage statorique:**
-- Résistances ou inductances en série
-- Réduction progressive de la tension
-- Démarrage progressif
-
-**Démarrage rotorique:**
-- Moteur à rotor bobiné
-- Résistances rotoriques
-- Amélioration du couple de démarrage
-
-**Variation de vitesse:**
-- Variation de fréquence (variateur)
-- Variation du nombre de pôles
-- Variation du glissement
-
-**Variateur de fréquence:**
-- Redresseur + onduleur
-- Contrôle U/f = constante
-- Variation continue de la vitesse
-
-**Vidéos YouTube:**
-- Démarrage moteur asynchrone: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Démarrage étoile-triangle: https://www.youtube.com/watch?v=LtJoJBUSe28
-- Variateur de vitesse: https://www.youtube.com/watch?v=8wHVQNu3Tz8`,
-        examples: [
-          'Démarrage Y-Δ: Id = 2,5 × In au lieu de 7 × In',
-          'Variateur: vitesse de 0 à 100% de ns',
-          'Freinage par injection de courant continu'
-        ],
-      },
-    ],
-  },
-  {
-    id: 'elec-6',
-    title: 'Électronique de puissance',
-    subject: 'physics',
-    description: 'Composants et convertisseurs statiques',
-    duration: '4h',
-    difficulty: 'advanced',
-    chapters: [
-      {
-        id: 'elec-6-ch1',
-        title: 'Composants de l\'électronique de puissance',
-        content: `Les semi-conducteurs de puissance permettent de contrôler l'énergie électrique.
-
-**Diode de puissance:**
-- Composant unidirectionnel non commandable
-- Conduction: VAK > 0
-- Blocage: VAK < 0
-- Applications: redressement, roue libre
-
-**Thyristor:**
-- Composant unidirectionnel commandable à l'amorçage
-- Amorçage: impulsion sur la gâchette
-- Blocage: courant s'annule
-- Applications: gradateurs, redresseurs commandés
-
-**Transistor IGBT:**
-- Composant commandable à l'amorçage et au blocage
-- Commande par tension (grille)
-- Fréquences de commutation élevées
-- Applications: onduleurs, hacheurs
-
-**MOSFET de puissance:**
-- Composant rapide
-- Faibles pertes en commutation
-- Applications: alimentations à découpage
-
-**Caractéristiques:**
-- Tension maximale: VDRM, VRRM
-- Courant maximal: ITAV, IF(AV)
-- Pertes: conduction + commutation
-
-**Vidéos YouTube:**
-- Composants de puissance: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Diode et thyristor: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- IGBT et MOSFET: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Diode: redressement simple alternance',
-          'Thyristor: gradateur de lumière',
-          'IGBT: onduleur de variateur de vitesse'
-        ],
-      },
-      {
-        id: 'elec-6-ch2',
-        title: 'Redresseurs',
-        content: `Conversion alternatif → continu.
-
-**Redressement non commandé:**
-- Diodes uniquement
-- Tension de sortie fixe
-- Applications: alimentations simples
-
-**Redresseur simple alternance:**
-- 1 diode
-- Ud(moy) = Umax/π ≈ 0,45 × Ueff
-- Ondulation importante
-
-**Redresseur double alternance:**
-- Pont de Graetz (4 diodes)
-- Ud(moy) = 2 × Umax/π ≈ 0,9 × Ueff
-- Meilleure qualité
-
-**Redressement commandé:**
-- Thyristors
-- Tension de sortie variable
-- Angle d'amorçage α
-
-**Pont mixte:**
-- 2 thyristors + 2 diodes
-- Ud(moy) = (Umax/π) × (1 + cos α)
-
-**Pont tout thyristors:**
-- 4 thyristors
-- Ud(moy) = (2 × Umax/π) × cos α
-- Fonctionnement en onduleur possible
-
-**Filtrage:**
-- Condensateur: lissage de tension
-- Inductance: lissage de courant
-
-**Vidéos YouTube:**
-- Redresseurs: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Pont de Graetz: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Redresseur commandé: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Redresseur monophasé: alimentation 12V',
-          'Redresseur triphasé: variateur de vitesse',
-          'Pont tout thyristors: réversibilité'
-        ],
-      },
-      {
-        id: 'elec-6-ch3',
-        title: 'Hacheurs et onduleurs',
-        content: `Convertisseurs continu-continu et continu-alternatif.
-
-**Hacheur série (Buck):**
-- Abaisseur de tension
-- Umoy = α × E
-- α: rapport cyclique (0 < α < 1)
-
-**Hacheur parallèle (Boost):**
-- Élévateur de tension
-- Umoy = E/(1 - α)
-
-**Hacheur 4 quadrants:**
-- Réversibilité en tension et courant
-- Pont en H (4 interrupteurs)
-
-**Onduleur monophasé:**
-- Conversion DC → AC
-- Pont en H
-- Modulation de largeur d'impulsion (MLI/PWM)
-
-**Onduleur triphasé:**
-- 6 interrupteurs (IGBT)
-- Création d'un système triphasé
-- Applications: variateurs de vitesse
-
-**Commande MLI:**
-- Fréquence de découpage élevée
-- Contrôle de l'amplitude et de la fréquence
-- Réduction des harmoniques
-
-**Vidéos YouTube:**
-- Hacheurs: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Onduleurs: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- MLI/PWM: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Hacheur série: alimentation ordinateur portable',
-          'Hacheur 4Q: traction électrique',
-          'Onduleur: alimentation sans interruption (ASI)'
-        ],
-      },
-    ],
-  },
-  {
-    id: 'elec-7',
-    title: 'Systèmes triphasés',
-    subject: 'physics',
-    description: 'Étude des réseaux triphasés équilibrés et déséquilibrés',
-    duration: '3h',
-    difficulty: 'intermediate',
-    chapters: [
-      {
-        id: 'elec-7-ch1',
-        title: 'Systèmes triphasés équilibrés',
-        content: `Le système triphasé est le mode de distribution de l'énergie électrique.
-
-**Définition:**
-Système de trois tensions sinusoïdales de même amplitude et déphasées de 2π/3 (120°).
-
-**Tensions simples:**
-v1(t) = V × sin(ωt)
-v2(t) = V × sin(ωt - 2π/3)
-v3(t) = V × sin(ωt - 4π/3)
-
-**Tensions composées:**
-u12 = v1 - v2
-u23 = v2 - v3
-u31 = v3 - v1
-
-**Relations:**
-U = √3 × V
-U: tension composée
-V: tension simple
-
-**Couplage étoile:**
-- Point neutre commun
-- Tensions simples accessibles
-- I = J (courant de ligne = courant de phase)
-
-**Couplage triangle:**
-- Pas de neutre
-- Tensions composées uniquement
-- I = √3 × J
-
-**Puissance triphasée:**
-P = 3 × V × J × cos(φ) = √3 × U × I × cos(φ)
-
-**Vidéos YouTube:**
-- Systèmes triphasés: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Couplage étoile-triangle: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Puissance en triphasé: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Réseau 400V/230V: U = 400V, V = 230V',
-          'Charge étoile: 3 impédances identiques',
-          'Charge triangle: moteur triphasé'
-        ],
-      },
-      {
-        id: 'elec-7-ch2',
-        title: 'Mesure de puissance en triphasé',
-        content: `Méthodes de mesure de la puissance en triphasé.
-
-**Méthode des trois wattmètres:**
-- Système avec neutre
-- P = P1 + P2 + P3
-- Mesure directe de chaque phase
-
-**Méthode des deux wattmètres (Blondel):**
-- Système sans neutre
-- P = P1 + P2
-- Valable même si déséquilibré
-
-**Théorème de Blondel:**
-La puissance active d'un système à n conducteurs se mesure avec n-1 wattmètres.
-
-**Calcul du facteur de puissance:**
-tan(φ) = √3 × (P1 - P2)/(P1 + P2)
-
-**Puissance réactive:**
-Q = √3 × (P1 - P2)
-
-**Wattmètre triphasé:**
-- Mesure directe P, Q, S
-- Affichage du cos(φ)
-- Analyseur de réseau
-
-**Vidéos YouTube:**
-- Mesure de puissance triphasée: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Méthode des 2 wattmètres: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Théorème de Blondel: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Charge équilibrée: P1 = P2 = P3',
-          'Charge inductive: P1 > P2',
-          'Charge capacitive: P1 < P2'
-        ],
-      },
-      {
-        id: 'elec-7-ch3',
-        title: 'Systèmes déséquilibrés',
-        content: `Analyse des systèmes triphasés non équilibrés.
-
-**Causes du déséquilibre:**
-- Charges monophasées
-- Défaut d'isolement
-- Rupture de phase
-
-**Composantes symétriques (Fortescue):**
-Tout système déséquilibré peut se décomposer en trois systèmes équilibrés:
-- Système direct (positif)
-- Système inverse (négatif)
-- Système homopolaire (zéro)
-
-**Méthode de résolution:**
-1. Calculer les composantes symétriques
-2. Résoudre chaque système séparément
-3. Superposer les résultats
-
-**Conséquences du déséquilibre:**
-- Échauffement des machines
-- Couple pulsatoire
-- Courant dans le neutre
-
-**Compensation:**
-- Répartition des charges
-- Condensateurs de compensation
-- Filtres actifs
-
-**Vidéos YouTube:**
-- Systèmes déséquilibrés: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Composantes symétriques: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Méthode de Fortescue: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Charge monophasée sur réseau triphasé',
-          'Rupture d\'une phase: système inverse',
-          'Court-circuit: composante homopolaire'
-        ],
-      },
-    ],
-  },
-  {
-    id: 'elec-8',
-    title: 'Automatismes et logique',
-    subject: 'physics',
-    description: 'Systèmes automatisés et logique combinatoire',
-    duration: '3h',
-    difficulty: 'intermediate',
-    chapters: [
-      {
-        id: 'elec-8-ch1',
-        title: 'Logique combinatoire',
-        content: `Fonctions logiques de base et algèbre de Boole.
-
-**Fonctions logiques de base:**
-- ET (AND): S = A · B
-- OU (OR): S = A + B
-- NON (NOT): S = Ā
-- NAND: S = A · B (barre)
-- NOR: S = A + B (barre)
-- XOR: S = A ⊕ B
-
-**Algèbre de Boole:**
-- Commutativité: A + B = B + A
-- Associativité: (A + B) + C = A + (B + C)
-- Distributivité: A · (B + C) = A · B + A · C
-- Théorèmes de De Morgan: A + B (barre) = Ā · B̄
-
-**Table de vérité:**
-Tableau donnant la sortie pour toutes les combinaisons d'entrées.
-
-**Simplification:**
-- Tableau de Karnaugh
-- Méthode algébrique
-- Minimisation du nombre de portes
-
-**Circuits combinatoires:**
-- Décodeurs
-- Multiplexeurs
-- Comparateurs
-- Additionneurs
-
-**Vidéos YouTube:**
-- Logique combinatoire: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Algèbre de Boole: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- Tableau de Karnaugh: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Fonction ET: S = 1 ssi A = 1 ET B = 1',
-          'Fonction OU: S = 1 si A = 1 OU B = 1',
-          'XOR: détection de parité'
-        ],
-      },
-      {
-        id: 'elec-8-ch2',
-        title: 'Logique séquentielle',
-        content: `Systèmes à mémoire et automates.
-
-**Bascules:**
-- Bascule RS: Set-Reset
-- Bascule D: Data (recopie l'entrée)
-- Bascule JK: universelle
-- Bascule T: Toggle (basculement)
-
-**Registres:**
-- Registre à décalage
-- Registre de stockage
-- Applications: mémoires, conversions
-
-**Compteurs:**
-- Compteur asynchrone (ripple)
-- Compteur synchrone
-- Compteur modulo N
-- Décompteur
-
-**Automates:**
-- Diagramme d'états
-- Table de transition
-- Équations d'évolution
-
-**GRAFCET:**
-- Représentation graphique
-- Étapes et transitions
-- Actions associées aux étapes
-
-**Vidéos YouTube:**
-- Logique séquentielle: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Bascules: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- GRAFCET: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Bascule RS: mémorisation d\'un état',
-          'Compteur 0-9: affichage digital',
-          'GRAFCET: cycle de machine automatique'
-        ],
-      },
-      {
-        id: 'elec-8-ch3',
-        title: 'Automates programmables (API)',
-        content: `Programmation et utilisation des automates industriels.
-
-**Constitution d'un API:**
-- Unité centrale (CPU)
-- Modules d'entrées/sorties
-- Alimentation
-- Interfaces de communication
-
-**Langages de programmation:**
-- Ladder (schéma à contacts)
-- Grafcet (SFC)
-- Liste d'instructions (IL)
-- Texte structuré (ST)
-- Blocs fonctionnels (FBD)
-
-**Programmation Ladder:**
-- Contacts NO (normalement ouvert)
-- Contacts NF (normalement fermé)
-- Bobines
-- Temporisations
-- Compteurs
-
-**Fonctions avancées:**
-- Temporisateurs (TON, TOF, TP)
-- Compteurs (CTU, CTD)
-- Comparateurs
-- Opérations arithmétiques
-
-**Applications:**
-- Automatisation industrielle
-- Contrôle de processus
-- Supervision
-
-**Vidéos YouTube:**
-- Automates programmables: https://www.youtube.com/watch?v=8wHVQNu3Tz8
-- Programmation Ladder: https://www.youtube.com/watch?v=AQqyGNOP_3o
-- GRAFCET sur API: https://www.youtube.com/watch?v=LtJoJBUSe28`,
-        examples: [
-          'Démarrage étoile-triangle automatique',
-          'Contrôle de niveau de cuve',
-          'Chaîne de production automatisée'
         ],
       },
     ],
