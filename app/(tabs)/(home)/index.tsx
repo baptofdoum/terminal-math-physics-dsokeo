@@ -1,161 +1,310 @@
-import React from "react";
-import { Stack, Link } from "expo-router";
-import { FlatList, Pressable, StyleSheet, View, Text, Alert, Platform } from "react-native";
-import { IconSymbol } from "@/components/IconSymbol";
-import { GlassView } from "expo-glass-effect";
-import { useTheme } from "@react-navigation/native";
 
-const ICON_COLOR = "#007AFF";
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { Stack, useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { IconSymbol } from '@/components/IconSymbol';
+import { colors, commonStyles } from '@/styles/commonStyles';
+import { useStorage } from '@/hooks/useStorage';
 
 export default function HomeScreen() {
-  const theme = useTheme();
-  const modalDemos = [
-    {
-      title: "Standard Modal",
-      description: "Full screen modal presentation",
-      route: "/modal",
-      color: "#007AFF",
-    },
-    {
-      title: "Form Sheet",
-      description: "Bottom sheet with detents and grabber",
-      route: "/formsheet",
-      color: "#34C759",
-    },
-    {
-      title: "Transparent Modal",
-      description: "Overlay without obscuring background",
-      route: "/transparent-modal",
-      color: "#FF9500",
-    }
-  ];
+  const router = useRouter();
+  const { history, skills } = useStorage();
 
-  const renderModalDemo = ({ item }: { item: (typeof modalDemos)[0] }) => (
-    <GlassView style={[
-      styles.demoCard,
-      Platform.OS !== 'ios' && { backgroundColor: theme.dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' }
-    ]} glassEffectStyle="regular">
-      <View style={[styles.demoIcon, { backgroundColor: item.color }]}>
-        <IconSymbol name="square.grid.3x3" color="white" size={24} />
-      </View>
-      <View style={styles.demoContent}>
-        <Text style={[styles.demoTitle, { color: theme.colors.text }]}>{item.title}</Text>
-        <Text style={[styles.demoDescription, { color: theme.dark ? '#98989D' : '#666' }]}>{item.description}</Text>
-      </View>
-      <Link href={item.route as any} asChild>
-        <Pressable>
-          <GlassView style={[
-            styles.tryButton,
-            Platform.OS !== 'ios' && { backgroundColor: theme.dark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)' }
-          ]} glassEffectStyle="clear">
-            <Text style={[styles.tryButtonText, { color: theme.colors.primary }]}>Try It</Text>
-          </GlassView>
-        </Pressable>
-      </Link>
-    </GlassView>
-  );
-
-  const renderHeaderRight = () => (
-    <Pressable
-      onPress={() => Alert.alert("Not Implemented", "This feature is not implemented yet")}
-      style={styles.headerButtonContainer}
-    >
-      <IconSymbol name="plus" color={theme.colors.primary} />
-    </Pressable>
-  );
-
-  const renderHeaderLeft = () => (
-    <Pressable
-      onPress={() => Alert.alert("Not Implemented", "This feature is not implemented yet")}
-      style={styles.headerButtonContainer}
-    >
-      <IconSymbol
-        name="gear"
-        color={theme.colors.primary}
-      />
-    </Pressable>
-  );
+  const recentHistory = history.slice(0, 3);
+  const topSkills = skills.sort((a, b) => b.progress - a.progress).slice(0, 3);
 
   return (
-    <>
+    <SafeAreaView style={styles.container} edges={['top']}>
       {Platform.OS === 'ios' && (
         <Stack.Screen
           options={{
-            title: "Building the app...",
-            headerRight: renderHeaderRight,
-            headerLeft: renderHeaderLeft,
+            title: 'Terminale S SI',
+            headerLargeTitle: true,
           }}
         />
       )}
-      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-        <FlatList
-          data={modalDemos}
-          renderItem={renderModalDemo}
-          keyExtractor={(item) => item.route}
-          contentContainerStyle={[
-            styles.listContainer,
-            Platform.OS !== 'ios' && styles.listContainerWithTabBar
-          ]}
-          contentInsetAdjustmentBehavior="automatic"
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
-    </>
+      
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={[
+          styles.contentContainer,
+          Platform.OS !== 'ios' && styles.contentContainerWithTabBar
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
+          <Text style={styles.welcomeText}>Bienvenue ! 👋</Text>
+          <Text style={styles.subtitle}>Continuez votre apprentissage</Text>
+        </View>
+
+        <View style={styles.quickActions}>
+          <TouchableOpacity
+            style={[styles.actionCard, { backgroundColor: colors.primary }]}
+            onPress={() => router.push('/(tabs)/courses')}
+          >
+            <IconSymbol name="book.fill" size={32} color="#ffffff" />
+            <Text style={styles.actionTitle}>Cours</Text>
+            <Text style={styles.actionSubtitle}>Mathématiques & Physique</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.actionCard, { backgroundColor: colors.secondary }]}
+            onPress={() => router.push('/(tabs)/exercises')}
+          >
+            <IconSymbol name="pencil" size={32} color="#ffffff" />
+            <Text style={styles.actionTitle}>Exercices</Text>
+            <Text style={styles.actionSubtitle}>Pratiquez vos compétences</Text>
+          </TouchableOpacity>
+        </View>
+
+        {topSkills.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Vos compétences</Text>
+            {topSkills.map((skill) => (
+              <View key={skill.id} style={commonStyles.card}>
+                <View style={styles.skillHeader}>
+                  <View>
+                    <Text style={styles.skillName}>{skill.name}</Text>
+                    <Text style={styles.skillSubject}>
+                      {skill.subject === 'math' ? 'Mathématiques' : 'Physique'}
+                    </Text>
+                  </View>
+                  <View style={styles.progressCircle}>
+                    <Text style={styles.progressText}>{Math.round(skill.progress)}%</Text>
+                  </View>
+                </View>
+                <View style={styles.progressBar}>
+                  <View
+                    style={[
+                      styles.progressFill,
+                      { width: `${skill.progress}%`, backgroundColor: colors.accent }
+                    ]}
+                  />
+                </View>
+                <Text style={styles.skillProgress}>
+                  {skill.exercisesCompleted} / {skill.totalExercises} exercices
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {recentHistory.length > 0 && (
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>Récemment consulté</Text>
+              <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
+                <Text style={styles.seeAllText}>Tout voir</Text>
+              </TouchableOpacity>
+            </View>
+            {recentHistory.map((item) => (
+              <View key={item.id} style={commonStyles.card}>
+                <View style={styles.historyItem}>
+                  <View style={[
+                    styles.historyIcon,
+                    { backgroundColor: item.type === 'course' ? colors.primary : colors.secondary }
+                  ]}>
+                    <IconSymbol
+                      name={item.type === 'course' ? 'book.fill' : 'pencil'}
+                      size={20}
+                      color="#ffffff"
+                    />
+                  </View>
+                  <View style={styles.historyContent}>
+                    <Text style={styles.historyTitle}>{item.title}</Text>
+                    <Text style={styles.historySubtitle}>
+                      {item.subject === 'math' ? 'Mathématiques' : 'Physique'} • {' '}
+                      {new Date(item.timestamp).toLocaleDateString('fr-FR')}
+                    </Text>
+                  </View>
+                  {item.completed && (
+                    <View style={styles.completedBadge}>
+                      <IconSymbol name="checkmark.circle.fill" size={20} color={colors.success} />
+                    </View>
+                  )}
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {recentHistory.length === 0 && topSkills.length === 0 && (
+          <View style={styles.emptyState}>
+            <IconSymbol name="book.fill" size={64} color={colors.textSecondary} />
+            <Text style={styles.emptyTitle}>Commencez votre apprentissage</Text>
+            <Text style={styles.emptyText}>
+              Explorez les cours et exercices pour développer vos compétences en mathématiques et physique.
+            </Text>
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor handled dynamically
+    backgroundColor: colors.background,
   },
-  listContainer: {
-    paddingVertical: 16,
-    paddingHorizontal: 16,
+  scrollView: {
+    flex: 1,
   },
-  listContainerWithTabBar: {
-    paddingBottom: 100, // Extra padding for floating tab bar
-  },
-  demoCard: {
-    borderRadius: 12,
+  contentContainer: {
     padding: 16,
+  },
+  contentContainerWithTabBar: {
+    paddingBottom: 100,
+  },
+  header: {
+    marginBottom: 24,
+  },
+  welcomeText: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: colors.text,
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: colors.textSecondary,
+  },
+  quickActions: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 24,
+  },
+  actionCard: {
+    flex: 1,
+    borderRadius: 16,
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 140,
+  },
+  actionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#ffffff',
+    marginTop: 12,
+    marginBottom: 4,
+  },
+  actionSubtitle: {
+    fontSize: 13,
+    color: 'rgba(255, 255, 255, 0.8)',
+    textAlign: 'center',
+  },
+  section: {
+    marginBottom: 24,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.text,
+    marginBottom: 12,
+  },
+  seeAllText: {
+    fontSize: 14,
+    color: colors.primary,
+    fontWeight: '600',
+  },
+  skillHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  skillName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.text,
+    marginBottom: 2,
+  },
+  skillSubject: {
+    fontSize: 13,
+    color: colors.textSecondary,
+  },
+  progressCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: colors.background,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  progressText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.primary,
+  },
+  progressBar: {
+    height: 8,
+    backgroundColor: colors.background,
+    borderRadius: 4,
+    overflow: 'hidden',
+    marginBottom: 8,
+  },
+  progressFill: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  skillProgress: {
+    fontSize: 13,
+    color: colors.textSecondary,
+  },
+  historyItem: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  demoIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+  historyIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 16,
+    marginRight: 12,
   },
-  demoContent: {
+  historyContent: {
     flex: 1,
   },
-  demoTitle: {
-    fontSize: 18,
+  historyTitle: {
+    fontSize: 15,
     fontWeight: '600',
-    marginBottom: 4,
-    // color handled dynamically
+    color: colors.text,
+    marginBottom: 2,
   },
-  demoDescription: {
-    fontSize: 14,
-    lineHeight: 18,
-    // color handled dynamically
+  historySubtitle: {
+    fontSize: 13,
+    color: colors.textSecondary,
   },
-  headerButtonContainer: {
-    padding: 6,
+  completedBadge: {
+    marginLeft: 8,
   },
-  tryButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 6,
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 60,
+    paddingHorizontal: 40,
   },
-  tryButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
-    // color handled dynamically
+  emptyTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: colors.text,
+    marginTop: 16,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptyText: {
+    fontSize: 15,
+    color: colors.textSecondary,
+    textAlign: 'center',
+    lineHeight: 22,
   },
 });
