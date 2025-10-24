@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { HistoryItem, Skill } from '@/types/course';
 
 const HISTORY_KEY = 'app_history';
@@ -41,65 +41,73 @@ export function useStorage() {
     }
   };
 
-  const addToHistory = (item: Omit<HistoryItem, 'id' | 'timestamp'>) => {
+  const addToHistory = useCallback((item: Omit<HistoryItem, 'id' | 'timestamp'>) => {
     const newItem: HistoryItem = {
       ...item,
       id: Date.now().toString(),
       timestamp: Date.now(),
     };
 
-    const updatedHistory = [newItem, ...history].slice(0, 50);
-    setHistory(updatedHistory);
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
-  };
+    setHistory((prevHistory) => {
+      const updatedHistory = [newItem, ...prevHistory].slice(0, 50);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
+      return updatedHistory;
+    });
+  }, []);
 
-  const markCourseCompleted = (courseId: string) => {
-    const updated = new Set(completedCourses);
-    updated.add(courseId);
-    setCompletedCourses(updated);
-    localStorage.setItem(COMPLETED_COURSES_KEY, JSON.stringify([...updated]));
-  };
+  const markCourseCompleted = useCallback((courseId: string) => {
+    setCompletedCourses((prev) => {
+      const updated = new Set(prev);
+      updated.add(courseId);
+      localStorage.setItem(COMPLETED_COURSES_KEY, JSON.stringify([...updated]));
+      return updated;
+    });
+  }, []);
 
-  const markExerciseCompleted = (exerciseId: string, skillName: string, subject: 'math' | 'physics') => {
-    const updated = new Set(completedExercises);
-    updated.add(exerciseId);
-    setCompletedExercises(updated);
-    localStorage.setItem(COMPLETED_EXERCISES_KEY, JSON.stringify([...updated]));
+  const updateSkill = useCallback((skillName: string, subject: 'math' | 'physics') => {
+    setSkills((prevSkills) => {
+      const existingSkillIndex = prevSkills.findIndex(s => s.name === skillName);
+      let updatedSkills = [...prevSkills];
+
+      if (existingSkillIndex >= 0) {
+        const skill = updatedSkills[existingSkillIndex];
+        updatedSkills[existingSkillIndex] = {
+          ...skill,
+          exercisesCompleted: skill.exercisesCompleted + 1,
+          progress: Math.min(100, ((skill.exercisesCompleted + 1) / skill.totalExercises) * 100),
+        };
+      } else {
+        const newSkill: Skill = {
+          id: Date.now().toString(),
+          name: skillName,
+          subject,
+          progress: 10,
+          exercisesCompleted: 1,
+          totalExercises: 10,
+        };
+        updatedSkills.push(newSkill);
+      }
+
+      localStorage.setItem(SKILLS_KEY, JSON.stringify(updatedSkills));
+      return updatedSkills;
+    });
+  }, []);
+
+  const markExerciseCompleted = useCallback((exerciseId: string, skillName: string, subject: 'math' | 'physics') => {
+    setCompletedExercises((prev) => {
+      const updated = new Set(prev);
+      updated.add(exerciseId);
+      localStorage.setItem(COMPLETED_EXERCISES_KEY, JSON.stringify([...updated]));
+      return updated;
+    });
 
     updateSkill(skillName, subject);
-  };
+  }, [updateSkill]);
 
-  const updateSkill = (skillName: string, subject: 'math' | 'physics') => {
-    const existingSkillIndex = skills.findIndex(s => s.name === skillName);
-    let updatedSkills = [...skills];
-
-    if (existingSkillIndex >= 0) {
-      const skill = updatedSkills[existingSkillIndex];
-      updatedSkills[existingSkillIndex] = {
-        ...skill,
-        exercisesCompleted: skill.exercisesCompleted + 1,
-        progress: Math.min(100, ((skill.exercisesCompleted + 1) / skill.totalExercises) * 100),
-      };
-    } else {
-      const newSkill: Skill = {
-        id: Date.now().toString(),
-        name: skillName,
-        subject,
-        progress: 10,
-        exercisesCompleted: 1,
-        totalExercises: 10,
-      };
-      updatedSkills.push(newSkill);
-    }
-
-    setSkills(updatedSkills);
-    localStorage.setItem(SKILLS_KEY, JSON.stringify(updatedSkills));
-  };
-
-  const clearHistory = () => {
+  const clearHistory = useCallback(() => {
     setHistory([]);
     localStorage.removeItem(HISTORY_KEY);
-  };
+  }, []);
 
   return {
     history,

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -13,13 +13,15 @@ export default function CourseDetailScreen() {
   const router = useRouter();
   const { addToHistory, markCourseCompleted, completedCourses } = useStorage();
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set());
+  const hasAddedToHistory = useRef(false);
 
   const course = courses.find(c => c.id === id);
   const isCompleted = course ? completedCourses.has(course.id) : false;
 
-  // Move useEffect before any conditional returns
+  // Add to history only once when the component mounts
   useEffect(() => {
-    if (course) {
+    if (course && !hasAddedToHistory.current) {
+      hasAddedToHistory.current = true;
       addToHistory({
         type: 'course',
         itemId: course.id,

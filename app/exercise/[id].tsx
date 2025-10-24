@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,13 +15,15 @@ export default function ExerciseDetailScreen() {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const hasAddedToHistory = useRef(false);
 
   const exercise = exercises.find(e => e.id === id);
   const isCompleted = exercise ? completedExercises.has(exercise.id) : false;
 
-  // Move useEffect before any conditional returns
+  // Add to history only once when the component mounts
   useEffect(() => {
-    if (exercise && !isCompleted) {
+    if (exercise && !hasAddedToHistory.current && !isCompleted) {
+      hasAddedToHistory.current = true;
       addToHistory({
         type: 'exercise',
         itemId: exercise.id,
